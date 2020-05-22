@@ -77,10 +77,8 @@ public class Mafia {
      */
     private static void pressEnterToContinue() {
         System.out.println("Press Enter key to continue...");
-        try {
-            System.in.read();
-        } catch (Exception e) {
-        }
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     /**
@@ -96,7 +94,7 @@ public class Mafia {
             r.keyRelease(17);
             r.keyRelease(76);
         } catch (AWTException ex) {
-            // Log
+            System.err.println(ex);
         }
         pause(1);
     }
@@ -140,7 +138,6 @@ public class Mafia {
     private static void start() {
 
         System.out.println("Welcome to Mafia!");
-        System.out.println((new Label("\u00a9")).getText() + " Tarun Prasad 2017");
         System.out.println("Day 1");
         System.out.println("Enter names of players: ");
         for (int i = 0; i < NO_OF_PLAYERS; i++) {
@@ -165,8 +162,14 @@ public class Mafia {
         Role role = getPlayer(target).role;
         Role results[] = null;
 
-        Role options[][] = { { Role.VIGILANTE, Role.VETERAN, Role.MAFIOSO }, { Role.DOCTOR, Role.SERIAL_KILLER },
-                { Role.GODFATHER }, { Role.ESCORT }, { Role.INVESTIGATOR }, { Role.JESTER } };
+        Role options[][] = {
+            {Role.VIGILANTE, Role.VETERAN, Role.MAFIOSO},
+            {Role.DOCTOR, Role.SERIAL_KILLER},
+            {Role.GODFATHER}, 
+            {Role.ESCORT}, 
+            {Role.INVESTIGATOR}, 
+            {Role.JESTER}
+        };
 
         for (Role roleSet[] : options) {
             if (Arrays.asList(roleSet).contains(role)) {
@@ -200,7 +203,7 @@ public class Mafia {
 
         Player vet = getPlayer(Role.VETERAN);
 
-        // Following code block runs only once after each night.
+        // The following code block runs only once after each night.
         // It checks if either the doctor or the escort visited the
         // veteran when he was on alert and if so, kills them.
 
@@ -457,7 +460,7 @@ public class Mafia {
                         System.out.println("You have " + player.splPowerLeft + " bullets left.");
                         if (player.splPowerLeft > 0) {
                             do {
-                                System.out.println("Whom do you want to kill?");
+                                System.out.println("Whom do you want to shoot?");
                                 target = sc.nextLine();
                             } while (!Arrays.asList(namesShuffled).contains(target) && !target.equals("none")
                                     || target.equals(name));

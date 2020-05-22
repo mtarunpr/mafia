@@ -116,7 +116,6 @@ public class Player {
             hasWon = true;
             splPowerLeft = 1;
             System.out.println("He has won the game, and will get his revenge from the grave.");
-            //return; // i.e., don't remove name yet; it is done in main() after killing
         }
         removeName();
         performPromotions();
